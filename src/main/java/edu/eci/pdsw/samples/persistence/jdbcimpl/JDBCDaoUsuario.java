@@ -42,7 +42,7 @@ public class JDBCDaoUsuario implements DaoUsuario {
 
     @Override
     public Usuario load(String email) throws PersistenceException {
-        PreparedStatement ps;        
+        PreparedStatement ps;       
         /*try {
         
         
@@ -56,8 +56,18 @@ public class JDBCDaoUsuario implements DaoUsuario {
     @Override
     public void save(Usuario u) throws PersistenceException {
         PreparedStatement ps;
-        
-        //throw new RuntimeException("No se ha implementado el metodo 'save' del DAOPUsuarioJDBC");
+
+        try {
+            ps=con.prepareStatement("insert into usuarios values(?,?)");
+            ps.setString(1, u.getEmail());
+            ps.setString(2, u.getNombre());
+            ps.execute();
+            con.commit();
+            
+            //throw new RuntimeException("No se ha implementado el metodo 'save' del DAOPUsuarioJDBC");
+        } catch (SQLException ex) {
+            throw new PersistenceException("Un error ha ocurrido mientras se guarda el usuario", ex);
+        }
 
     }
 

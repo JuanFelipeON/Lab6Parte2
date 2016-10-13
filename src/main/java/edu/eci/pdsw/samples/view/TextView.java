@@ -47,7 +47,9 @@ public class TextView {
          * OPERACIONES CON LOS DAO
          */
        
-        
+        //daof.getDaoUsuario().save(new Usuario("castellanosIsa@gmail.com", "Isabel Castellanos"));
+        //daof.getDaoUsuario().save(new Usuario("castellanos.Isa@gmail.com", "Isabel Castellanos"));
+        daof.getDaoUsuario().save(new Usuario("alfi@gmail.com", "Oscar Ardila"));
         
         daof.commitTransaction();
         daof.endSession();

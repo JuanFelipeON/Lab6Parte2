@@ -19,6 +19,7 @@ package edu.eci.pdsw.test;
 
 import edu.eci.pdsw.samples.entities.Usuario;
 import edu.eci.pdsw.samples.persistence.DaoFactory;
+import edu.eci.pdsw.samples.persistence.DaoUsuario;
 import edu.eci.pdsw.samples.persistence.PersistenceException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -54,6 +55,11 @@ public class PacientePersistenceTest {
                 
         //IMPLEMENTACION DE LAS PRUEBAS
         fail("Pruebas no implementadas");
+        //DaoUsuario du=daof.getDaoUsuario();
+        //du.save(new Usuario("castellanosIsa@gmail.com", "Isabel Castellanos"));
+        
+        
+        
 
 
         daof.commitTransaction();
