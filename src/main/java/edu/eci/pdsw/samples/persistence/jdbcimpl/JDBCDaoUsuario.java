@@ -42,16 +42,27 @@ public class JDBCDaoUsuario implements DaoUsuario {
 
     @Override
     public Usuario load(String email) throws PersistenceException {
-        PreparedStatement ps;       
-        /*try {
+        PreparedStatement ps; 
+        String correo, nombre;
+        try {
+        
+        ps=con.prepareStatement("select email, nombre from usuarios where email=?");
+        ps.setString(1, email);
+        ResultSet usuarios=ps.executeQuery();
+        usuarios.absolute(1);
+        correo= usuarios.getString(1);
+        nombre= usuarios.getString(2);
         
         
-          
+                  
         } catch (SQLException ex) {
             throw new PersistenceException("An error ocurred while loading "+email,ex);
-        }*/
-        throw new RuntimeException("No se ha implementado el metodo 'load' del DAOUsuarioJDBC");
+        }
+        return new Usuario(correo, nombre);
     }
+               
+        
+    
 
     @Override
     public void save(Usuario u) throws PersistenceException {
