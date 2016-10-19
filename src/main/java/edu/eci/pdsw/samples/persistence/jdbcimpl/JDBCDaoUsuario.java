@@ -38,43 +38,39 @@ public class JDBCDaoUsuario implements DaoUsuario {
     public JDBCDaoUsuario(Connection con) {
         this.con = con;
     }
-        
 
     @Override
     public Usuario load(String email) throws PersistenceException {
-        PreparedStatement ps; 
+        PreparedStatement ps;
         String correo, nombre;
         try {
-        
-        ps=con.prepareStatement("select email, nombre from usuarios where email=?");
-        ps.setString(1, email);
-        ResultSet usuarios=ps.executeQuery();
-        usuarios.absolute(1);
-        correo= usuarios.getString(1);
-        nombre= usuarios.getString(2);
-        
-        
-                  
+
+            ps = con.prepareStatement("select email, nombre from usuarios where email=?");
+            ps.setString(1, email);
+            
+            ResultSet usuarios = ps.executeQuery();
+            usuarios.absolute(1);
+            
+            correo = usuarios.getString(1);
+            nombre = usuarios.getString(2);
+
         } catch (SQLException ex) {
-            throw new PersistenceException("An error ocurred while loading "+email,ex);
+            throw new PersistenceException("An error ocurred while loading " + email, ex);
         }
         return new Usuario(correo, nombre);
     }
-               
-        
-    
 
     @Override
     public void save(Usuario u) throws PersistenceException {
         PreparedStatement ps;
 
         try {
-            ps=con.prepareStatement("insert into usuarios values(?,?)");
+            ps = con.prepareStatement("insert into usuarios values(?,?)");
             ps.setString(1, u.getEmail());
             ps.setString(2, u.getNombre());
             ps.execute();
             con.commit();
-            
+
             //throw new RuntimeException("No se ha implementado el metodo 'save' del DAOPUsuarioJDBC");
         } catch (SQLException ex) {
             throw new PersistenceException("Un error ha ocurrido mientras se guarda el usuario", ex);
@@ -87,10 +83,10 @@ public class JDBCDaoUsuario implements DaoUsuario {
         PreparedStatement ps;
         /*try {
             
-        } catch (SQLException ex) {
-            throw new PersistenceException("An error ocurred while updating Usuario.",ex);
-        } */
+         } catch (SQLException ex) {
+         throw new PersistenceException("An error ocurred while updating Usuario.",ex);
+         } */
         throw new RuntimeException("No se ha implementado el metodo 'update' del DAOPAcienteJDBC");
     }
-    
+
 }

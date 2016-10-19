@@ -54,17 +54,37 @@ public class PacientePersistenceTest {
         daof.beginSession();
                 
         //IMPLEMENTACION DE LAS PRUEBAS
-        fail("Pruebas no implementadas");
-        //DaoUsuario du=daof.getDaoUsuario();
-        //du.save(new Usuario("castellanosIsa@gmail.com", "Isabel Castellanos"));
+        
+        saveUsuario(daof.getDaoUsuario());
+        saveUsuarioExi(daof.getDaoUsuario());
+        
+        //fail("Pruebas no implementadas");
         
         
-        
-
-
         daof.commitTransaction();
         daof.endSession();        
     }
+    
+
+    public void saveUsuario(DaoUsuario daou) throws PersistenceException{
+        Usuario nuevo = new Usuario("prueba@gmail.com", "nuevo user");
+        daou.save(nuevo);
+        Usuario esperado = daou.load("prueba@gmail.com");
+        assertEquals(nuevo.getEmail(), esperado.getEmail());
+        
+    }
+    
+    public void saveUsuarioExi(DaoUsuario daou){
+        Usuario existente = new Usuario("prueba@gmail.com", "Oscar Ardila");
+        try{
+            daou.save(existente);
+            fail("se esperaba una excepcion de persistencia ya que el usuario ya existe");
+        }catch(PersistenceException e){
+            
+        }
+    }
+    
+   
     
     
 }

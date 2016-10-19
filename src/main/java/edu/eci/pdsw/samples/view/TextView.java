@@ -51,7 +51,10 @@ public class TextView {
         //daof.getDaoUsuario().save(new Usuario("castellanosIsa@gmail.com", "Isabel Castellanos"));
         //daof.getDaoUsuario().save(new Usuario("castellanos.Isa@gmail.com", "Isabel Castellanos"));
         //daof.getDaoUsuario().save(new Usuario("alfi@gmail.com", "Oscar Ardila"));
+        
         Usuario u=daof.getDaoUsuario().load("castellanosIsa@gmail.com");
+        System.out.println(u.getNombre());
+        System.out.println(u.getEmail());
         
         daof.commitTransaction();
         daof.endSession();
